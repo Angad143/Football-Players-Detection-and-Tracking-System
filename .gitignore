@@ -9,7 +9,8 @@ __pycache__/
 myenv/
 yolov8x.pt
 runs
-
+football-players-detection-1/
+api_keys.txt
 ##################################################
 # C extensions
 *.so
