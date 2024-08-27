@@ -11,6 +11,8 @@ yolov8x.pt
 runs
 football-players-detection-1/
 api_keys.txt
+models/best.pt
+models/last.pt
 ##################################################
 # C extensions
 *.so
