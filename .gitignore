@@ -13,6 +13,9 @@ football-players-detection-1/
 api_keys.txt
 models/best.pt
 models/last.pt
+output_videos/output_video.avi
+
+
 ##################################################
 # C extensions
 *.so
