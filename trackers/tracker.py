@@ -210,6 +210,38 @@ class Tracker:
 
         return frame
     
+    def draw_team_ball_control(self, frame, frame_num, team_ball_control):
+        """
+        Draws the ball control statistics for both teams on the frame.
+        
+        Parameters:
+        - frame (ndarray): The video frame to draw on.
+        - frame_num (int): The current frame number.
+        - team_ball_control (pd.Series): Series indicating which team had ball control in each frame.
+        
+        Returns:
+        - frame (ndarray): The annotated frame.
+        """
+        # Draw a semi-transparent rectangle for displaying statistics
+        overlay = frame.copy()
+        cv2.rectangle(overlay, (1350, 850), (1900, 970), (255, 255, 255), -1)
+        alpha = 0.4
+        cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
+
+        team_ball_control_till_frame = team_ball_control[:frame_num + 1]  # Slice control data up to current frame
+        # Calculate the number of frames each team had ball control
+        team_1_num_frames = team_ball_control_till_frame[team_ball_control_till_frame == 1].shape[0]
+        team_2_num_frames = team_ball_control_till_frame[team_ball_control_till_frame == 2].shape[0]
+        team_1 = team_1_num_frames / (team_1_num_frames + team_2_num_frames)
+        team_2 = team_2_num_frames / (team_1_num_frames + team_2_num_frames)
+
+        # Display the ball control percentages on the frame
+        cv2.putText(frame, f"Team 1 Ball Control: {team_1 * 100:.2f}%", (1400, 900), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
+        cv2.putText(frame, f"Team 2 Ball Control: {team_2 * 100:.2f}%", (1400, 950), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
+
+        return frame
+    
+    
     def draw_annotations(self, video_frames, tracks, team_ball_control):
         """
         Draws annotations on video frames including object tracking and ball control statistics.
