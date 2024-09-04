@@ -15,6 +15,27 @@ class Tracker:
         self.model = YOLO(model_path)  
         self.tracker = sv.ByteTrack() 
 
+    def interpolate_ball_positions(self, ball_positions):
+        """
+        Interpolates missing ball positions to ensure continuity in the tracking data.
+        
+        Parameters:
+        - ball_positions (list): List of dictionaries containing ball bounding boxes for each frame.
+        
+        Returns:
+        - ball_positions (list): List of dictionaries with interpolated ball positions.
+        """
+        ball_positions = [x.get(1, {}).get('bbox', []) for x in ball_positions]  # Extract bounding boxes
+        df_ball_positions = pd.DataFrame(ball_positions, columns=['x1', 'y1', 'x2', 'y2'])  # Create DataFrame
+
+        # Interpolate missing values
+        df_ball_positions = df_ball_positions.interpolate()  # Interpolate missing values
+        df_ball_positions = df_ball_positions.bfill()  # Backfill any remaining missing values
+
+        ball_positions = [{1: {"bbox": x}} for x in df_ball_positions.to_numpy().tolist()]  # Convert back to original format
+
+        return ball_positions
+
     def detect_frames(self, frames):
         # Detect objects in the given frames using the YOLO model
         batch_size = 20  

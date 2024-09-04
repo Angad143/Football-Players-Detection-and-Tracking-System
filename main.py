@@ -20,6 +20,10 @@ def main():
     #     # save croppeed image of a players
     #     cv2.imwrite(f"output_videos/cropped_image.jpg", cropped_image)
     
+    # Interpolate missing ball positions in the tracks
+    tracks["ball"] = tracker.interpolate_ball_positions(tracks["ball"])
+
+
     # Initialize the TeamAssigner
     team_assigner = TeamAssigner()
 
