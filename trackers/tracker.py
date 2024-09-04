@@ -210,7 +210,7 @@ class Tracker:
 
         return frame
     
-    def draw_annotations(self, video_frames, tracks):
+    def draw_annotations(self, video_frames, tracks, team_ball_control):
         """
         Draws annotations on video frames including object tracking and ball control statistics.
         
@@ -248,7 +248,8 @@ class Tracker:
             for track_id, ball in ball_dict.items():
                 frame = self.draw_triangle(frame, ball["bbox"], (0, 255, 0))  # Draw triangle around ball
 
-           
+            # Draw team ball control
+            frame = self.draw_team_ball_control(frame, frame_num, team_ball_control)
 
             output_video_frames.append(frame)  # Add the annotated frame to the output list
 

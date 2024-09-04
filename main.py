@@ -2,6 +2,8 @@ from utils import read_video, save_video
 from trackers import Tracker
 import cv2
 from team_assigner import TeamAssigner
+from player_ball_assigner import PlayerBallAssigner
+
 def main():
     video_frames = read_video("inputs_videos/football_video_01.mp4")
 
@@ -20,9 +22,30 @@ def main():
     #     # save croppeed image of a players
     #     cv2.imwrite(f"output_videos/cropped_image.jpg", cropped_image)
     
+    
+    # Initialize the PlayerBallAssigner
+    player_assigner = PlayerBallAssigner()
+
+    # Initialize a list to keep track of ball control by teams
+    team_ball_control = []
+
+    # Assign the ball to a player and track team ball control for each frame
+    for frame_num, player_track in enumerate(tracks['players']):
+        # Get the bounding box of the ball
+        ball_bbox = tracks['ball'][frame_num][1]['bbox']
+        # Assign the ball to a player based on the ball's bounding box
+        assigned_player = player_assigner.assign_ball_to_player(player_track, ball_bbox)
+
+        # Update ball ownership status and team ball control list
+        if assigned_player != -1:
+            tracks['players'][frame_num][assigned_player]['has_ball'] = True
+            team_ball_control.append(tracks['players'][frame_num][assigned_player]['team'])
+        else:
+            # Maintain the previous team's ball control if no player is assigned
+            team_ball_control.append(team_ball_control[-1])
+
     # Interpolate missing ball positions in the tracks
     tracks["ball"] = tracker.interpolate_ball_positions(tracks["ball"])
-
 
     # Initialize the TeamAssigner
     team_assigner = TeamAssigner()
@@ -44,7 +67,7 @@ def main():
 
 
     # Annotate video frames with object tracks
-    output_video_frames = tracker.draw_annotations(video_frames, tracks)
+    output_video_frames = tracker.draw_annotations(video_frames, tracks, team_ball_control)
 
     save_video(output_video_frames, "output_videos/output_video.avi")
 
