@@ -4,6 +4,7 @@ import cv2
 import numpy as np
 from team_assigner import TeamAssigner
 from player_ball_assigner import PlayerBallAssigner
+from camera_movement_estimator import CameraMovementEstimator
 
 def main():
     video_frames = read_video("inputs_videos/football_video_01.mp4")
@@ -11,6 +12,16 @@ def main():
     tracker = Tracker("models/best.pt")
 
     tracks = tracker.get_object_tracks(video_frames, read_from_stub = True, stub_path = "stubs/track_stubs.pkl")
+
+    # Initialize the CameraMovementEstimator with the first frame of the video
+    camera_movement_estimator = CameraMovementEstimator(video_frames[0])
+
+    # Estimate camera movement per frame, optionally loading from a stub file
+    camera_movement_per_frame = camera_movement_estimator.get_camera_movement(video_frames,
+                                                                                read_from_stub=True,
+                                                                                stub_path='stubs/camera_movement_stub.pkl')
+
+    
     
     # # save croppeed image of a players
     # for tracks_id, player in tracks["players"][0].items():
@@ -70,6 +81,9 @@ def main():
 
     # Annotate video frames with object tracks
     output_video_frames = tracker.draw_annotations(video_frames, tracks, team_ball_control)
+
+    # Annotate video frames with camera movement information
+    output_video_frames = camera_movement_estimator.draw_camera_movement(output_video_frames, camera_movement_per_frame)
 
     save_video(output_video_frames, "output_videos/output_video.avi")
 

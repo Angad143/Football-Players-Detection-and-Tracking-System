@@ -32,7 +32,8 @@ class Tracker:
         df_ball_positions = df_ball_positions.interpolate()  # Interpolate missing values
         df_ball_positions = df_ball_positions.bfill()  # Backfill any remaining missing values
 
-        ball_positions = [{1: {"bbox": x}} for x in df_ball_positions.to_numpy().tolist()]  # Convert back to original format
+        # Convert back to original format
+        ball_positions = [{1: {"bbox": x}} for x in df_ball_positions.to_numpy().tolist()]  
 
         return ball_positions
 
@@ -118,7 +119,6 @@ class Tracker:
 
         return tracks  # Return the dictionary of tracks
     
-
     
     def draw_ellipse(self, frame, bbox, color, track_id=None):
         """
@@ -228,7 +228,9 @@ class Tracker:
         alpha = 0.4
         cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
 
-        team_ball_control_till_frame = team_ball_control[:frame_num + 1]  # Slice control data up to current frame
+        # Slice control data up to current frame
+        team_ball_control_till_frame = team_ball_control[:frame_num + 1]  
+
         # Calculate the number of frames each team had ball control
         team_1_num_frames = team_ball_control_till_frame[team_ball_control_till_frame == 1].shape[0]
         team_2_num_frames = team_ball_control_till_frame[team_ball_control_till_frame == 2].shape[0]
