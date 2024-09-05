@@ -7,7 +7,7 @@ sys.path.append('../')
 from utils import measure_distance, measure_xy_distance  
 
 class CameraMovementEstimator():
-    
+
     def __init__(self, frame):
         # Initialize the class with the first video frame and setup necessary parameters
         self.minimum_distance = 5  # Minimum movement threshold for considering camera movement
@@ -36,7 +36,17 @@ class CameraMovementEstimator():
             mask=mask_features  # Use the custom mask for corner detection
         )
 
-   
+    def add_adjust_positions_to_tracks(self, tracks, camera_movement_per_frame):
+        # Adjust the object positions in the tracks according to the camera movement
+        for object, object_tracks in tracks.items():
+            for frame_num, track in enumerate(object_tracks):
+                for track_id, track_info in track.items():
+                    position = track_info['position']
+                    camera_movement = camera_movement_per_frame[frame_num]
+                    # Adjust the position of the object based on the camera movement
+                    position_adjusted = (position[0] - camera_movement[0], position[1] - camera_movement[1])
+                    tracks[object][frame_num][track_id]['position_adjusted'] = position_adjusted
+                    
     def get_camera_movement(self, frames, read_from_stub=False, stub_path=None):
         # If a saved result (stub) is available, load it to avoid recomputing
         if read_from_stub and stub_path is not None and os.path.exists(stub_path):

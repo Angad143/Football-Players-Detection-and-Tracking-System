@@ -30,6 +30,8 @@ def main():
                                                                                 stub_path='stubs/camera_movement_stub.pkl')
 
     
+    # Adjust positions in tracks based on estimated camera movement
+    camera_movement_estimator.add_adjust_positions_to_tracks(tracks, camera_movement_per_frame)
     
     # # save croppeed image of a players
     # for tracks_id, player in tracks["players"][0].items():
