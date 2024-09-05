@@ -7,11 +7,19 @@ from player_ball_assigner import PlayerBallAssigner
 from camera_movement_estimator import CameraMovementEstimator
 
 def main():
+    # Read the video frames
     video_frames = read_video("inputs_videos/football_video_01.mp4")
 
-    tracker = Tracker("models/best.pt")
+    # Initialize the Tracker with the path to the YOLO model
+    tracker = Tracker('models/best.pt')
 
-    tracks = tracker.get_object_tracks(video_frames, read_from_stub = True, stub_path = "stubs/track_stubs.pkl")
+    # Get object tracks from the video frames, optionally loading from a stub file
+    tracks = tracker.get_object_tracks(video_frames,
+                                       read_from_stub=True,
+                                       stub_path='stubs/track_stubs.pkl')
+    
+    # Add object positions to the tracks
+    tracker.add_position_to_tracks(tracks)
 
     # Initialize the CameraMovementEstimator with the first frame of the video
     camera_movement_estimator = CameraMovementEstimator(video_frames[0])

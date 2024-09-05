@@ -7,13 +7,33 @@ import pandas as pd
 import numpy as np
 import sys
 sys.path.append("../")
-from utils import get_center_of_bbox, get_bbox_width
+from utils import get_center_of_bbox, get_bbox_width, get_foot_position
 
 class Tracker:
     def __init__(self, model_path):
         # Initialize the Tracker class with a YOLO model and a ByteTrack object
         self.model = YOLO(model_path)  
         self.tracker = sv.ByteTrack() 
+
+    def add_position_to_tracks(self, tracks):
+        """
+        Adds the position of detected objects to the tracking information.
+        Positions are determined based on the object type (ball or player/referee).
+        """
+        # Iterate through each type of object (e.g., players, referees, ball)
+        for obj_type, object_tracks in tracks.items():
+            # Iterate through each frame's tracks
+            for frame_num, track in enumerate(object_tracks):
+                # Iterate through each track ID in the current frame
+                for track_id, track_info in track.items():
+                    bbox = track_info['bbox']  # Get bounding box for the track
+                    # Determine position based on object type
+                    if obj_type == 'ball':
+                        position = get_center_of_bbox(bbox)  # Use the center of the bbox for the ball
+                    else:
+                        position = get_foot_position(bbox)  # Use the foot position for players/referees
+                    tracks[obj_type][frame_num][track_id]['position'] = position  # Update position in tracks
+                    
 
     def interpolate_ball_positions(self, ball_positions):
         """
