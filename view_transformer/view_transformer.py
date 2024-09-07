@@ -26,3 +26,21 @@ class ViewTransformer():
 
         # Calculate the perspective transformation matrix from pixel coordinates to real-world coordinates
         self.persepctive_trasnformer = cv2.getPerspectiveTransform(self.pixel_vertices, self.target_vertices)
+
+
+    # Transform the adjusted positions of tracked objects to real-world coordinates
+    def add_transformed_position_to_tracks(self, tracks):
+
+        # Loop through each tracked object
+        for object, object_tracks in tracks.items():
+            for frame_num, track in enumerate(object_tracks):
+                # Loop through each track ID and its associated position
+                for track_id, track_info in track.items():
+                    position = track_info['position_adjusted']  # Get the adjusted position of the object
+                    position = np.array(position)  # Convert the position to a NumPy array
+                    # Transform the position to real-world coordinates
+                    position_transformed = self.transform_point(position)
+                    if position_transformed is not None:  # If transformation is successful
+                        position_transformed = position_transformed.squeeze().tolist()  # Flatten and convert to list
+                    # Add the transformed position to the track
+                    tracks[object][frame_num][track_id]['position_transformed'] = position_transformed
