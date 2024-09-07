@@ -27,6 +27,20 @@ class ViewTransformer():
         # Calculate the perspective transformation matrix from pixel coordinates to real-world coordinates
         self.persepctive_trasnformer = cv2.getPerspectiveTransform(self.pixel_vertices, self.target_vertices)
 
+    # Transform a single point from pixel space to real-world coordinates
+    def transform_point(self, point):
+        p = (int(point[0]), int(point[1]))  # Convert the point to integer format for OpenCV functions
+        # Check if the point lies inside the polygon formed by pixel vertices (court boundaries)
+        is_inside = cv2.pointPolygonTest(self.pixel_vertices, p, False) >= 0 
+        if not is_inside:  # If the point is outside the polygon, return None
+            return None
+
+        # Reshape the point for perspective transformation and convert it to float32 format
+        reshaped_point = point.reshape(-1, 1, 2).astype(np.float32)
+        # Apply the perspective transformation to the point
+        tranform_point = cv2.perspectiveTransform(reshaped_point, self.persepctive_trasnformer)
+        return tranform_point.reshape(-1, 2)  # Reshape the transformed point back to a 2D format
+
 
     # Transform the adjusted positions of tracked objects to real-world coordinates
     def add_transformed_position_to_tracks(self, tracks):

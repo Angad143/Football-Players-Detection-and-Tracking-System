@@ -45,6 +45,11 @@ def main():
     #     # save croppeed image of a players
     #     cv2.imwrite(f"output_videos/cropped_image.jpg", cropped_image)
     
+    # Initialize the ViewTransformer
+    view_transformer = ViewTransformer()
+
+    # Add transformed positions to tracks based on view transformation
+    view_transformer.add_transformed_position_to_tracks(tracks)
 
     # Interpolate missing ball positions in the tracks
     tracks["ball"] = tracker.interpolate_ball_positions(tracks["ball"])
