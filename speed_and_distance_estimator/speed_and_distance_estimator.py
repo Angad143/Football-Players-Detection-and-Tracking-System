@@ -75,4 +75,26 @@ class SpeedAndDistance_Estimator():
                 if object == "ball" or object == "referees":
                     continue
 
-                
+                # Iterate through each track ID and its associated information
+                for _, track_info in object_tracks[frame_num].items():
+                    if "speed" in track_info:  # Check if speed data is available
+                        speed = track_info.get('speed', None)  # Get the speed value
+                        distance = track_info.get('distance', None)  # Get the distance value
+                        if speed is None or distance is None:  # Skip if either value is missing
+                            continue
+
+                        # Get the bounding box of the object and calculate the foot position
+                        bbox = track_info['bbox']
+                        position = get_foot_position(bbox)  # Get the position of the object (near foot)
+                        position = list(position)  # Convert the position to a list
+                        position[1] += 40  # Adjust the vertical position to draw text below the bounding box
+
+                        position = tuple(map(int, position))  # Convert position back to a tuple of integers
+                        # Draw the speed information on the frame at the calculated position
+                        cv2.putText(frame, f"{speed:.2f} km/h", position, cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+                        # Draw the distance information below the speed
+                        cv2.putText(frame, f"{distance:.2f} m", (position[0], position[1] + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
+
+            output_frames.append(frame)  # Add the annotated frame to the output list
+
+        return output_frames  # Return the list of frames with drawn speed and distance information
