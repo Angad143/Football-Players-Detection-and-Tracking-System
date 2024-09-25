@@ -4,6 +4,7 @@
 
 ## Introduction
 This project detects and tracks football players, referees, and the ball from video footage using advanced AI techniques. It utilizes YOLO (You Only Look Once) for object detection and Kmeans for player classification. The project also calculates each player’s speed and distance covered during a match and measures team possession based on ball control.
+<img src="output_videos/tracked_players.png" alt="tracked_players" width="1200" height="400">
 
 ## Features
 - **Player and Referee Detection**: Uses [YOLOv5](https://github.com/ultralytics/yolov5) to detect players, referees, and footballs in video footage.
