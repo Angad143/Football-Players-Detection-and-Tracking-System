@@ -62,4 +62,17 @@ class SpeedAndDistance_Estimator():
                         tracks[object][frame_num_batch][track_id]['speed'] = speed_km_per_hour  # Assign calculated speed
                         tracks[object][frame_num_batch][track_id]['distance'] = total_distance[object][track_id]  # Assign total distance covered
 
-    
+    def draw_speed_and_distance(self, frames, tracks):
+        # Draw speed and distance information on each frame of the video
+
+        output_frames = []  # Initialize an empty list to store the frames with drawn information
+
+        # Iterate through each frame and add speed and distance data
+        for frame_num, frame in enumerate(frames):
+            # Iterate through each tracked object in the current frame
+            for object, object_tracks in tracks.items():
+                # Skip ball and referees as we are only interested in players' movements
+                if object == "ball" or object == "referees":
+                    continue
+
+                
