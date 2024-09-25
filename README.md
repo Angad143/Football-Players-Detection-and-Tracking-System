@@ -3,10 +3,10 @@
 # Football Players Detection and Tracking
 
 ## Introduction
-This project detects and tracks football players, referees, and the ball from video footage using advanced AI techniques. It utilizes YOLO (You Only Look Once) for object detection and Kmeans for player classification. The project also calculates each player’s speed and distance covered during a match, and measures team possession based on ball control.
+This project detects and tracks football players, referees, and the ball from video footage using advanced AI techniques. It utilizes YOLO (You Only Look Once) for object detection and Kmeans for player classification. The project also calculates each player’s speed and distance covered during a match and measures team possession based on ball control.
 
 ## Features
-- **Player and Referee Detection**: Uses YOLO to detect players, referees, and footballs in video footage.
+- **Player and Referee Detection**: Uses [YOLOv5](https://github.com/ultralytics/yolov5) to detect players, referees, and footballs in video footage.
 - **Team Classification**: Automatically assigns players to teams based on their jersey color using Kmeans clustering.
 - **Ball Possession Analysis**: Calculates which team has control of the ball and their percentage of possession.
 - **Player Tracking**: Tracks player movements in real-time, measuring distance covered in meters using perspective transformation.
@@ -18,7 +18,7 @@ This project detects and tracks football players, referees, and the ball from vi
 - **Video Clips**: Videos used from a different source since Kaggle removed them from the dataset: [Input Videos](https://github.com/Angad143/Football-Analysis-Projects/tree/main/Inputs_Videos)
 
 ## Technologies Used
-- **YOLO**: Detects players, referees, and footballs in the video.
+- **YOLOv5**: Detects players, referees, and footballs in the video. ([Ultralytics YOLOv5](https://github.com/ultralytics/yolov5))
 - **Kmeans Clustering**: Classifies players based on their team colors.
 - **Optical Flow**: Tracks camera movement to ensure accurate player tracking.
 - **Perspective Transformation**: Converts pixel measurements into real-world meters.
@@ -34,6 +34,5 @@ pip install ultralytics supervision opencv-python numpy matplotlib pandas
 - **YOLO Detection**: Successfully detects and tracks players, referees, and the ball in the video.
 - **Speed and Distance Calculation**: Measures the speed and distance covered by each player during the game.
 
----
 
-This simplified version is now easy to read and includes the necessary dataset links and information.
+This version now includes the [Ultralytics YOLOv5](https://github.com/ultralytics/yolov5) link for clarity.
