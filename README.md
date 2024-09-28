@@ -1,3 +1,18 @@
+# **Tools and Libraries Used in Our Project**
+
+<div style="display: flex; flex-wrap: wrap; gap: 10px;">
+  <img src="https://img.shields.io/badge/Google%20Colab-blue" alt="Google Colab" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/OpenCV-5C3EE8?style=flat&logo=opencv&logoColor=white" alt="OpenCV" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/YOLOv8-FF6F00?style=flat&logo=YOLOv8&logoColor=white" alt="YOLOv8" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/Ultralytics-41b883?style=flat&logo=ultralytics&logoColor=white" alt="Ultralytics" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?style=flat&logo=pytorch&logoColor=white" alt="PyTorch" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/K--Means-FF0000?style=flat" alt="K-Means" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/NumPy-013243?style=flat&logo=numpy&logoColor=white" alt="NumPy" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/Pandas-150458?style=flat&logo=pandas&logoColor=white" alt="Pandas" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/Matplotlib-003366?style=flat&logo=matplotlib&logoColor=white" alt="Matplotlib" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/Supervision-F7931E?style=flat" alt="Supervision" style="flex: 1 1 30%;">
+  <img src="https://img.shields.io/badge/Scikit%20Learn-F7931E?style=flat&logo=scikit-learn&logoColor=white" alt="Scikit Learn" style="flex: 1 1 30%;">
+</div>
 
 
 # Football Players Detection and Tracking
