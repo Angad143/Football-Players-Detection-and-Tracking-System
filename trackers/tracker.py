@@ -288,7 +288,7 @@ class Tracker:
 
             # Draw Players
             for track_id, player in player_dict.items():
-                color = player.get("team_color", (0, 0, 255))  # Get color for the player, default is red
+                color = player.get("team_color", (0, 255, 0))  # Get color for the player, default is red
                 frame = self.draw_ellipse(frame, player["bbox"], color, track_id)  # Draw ellipse around player
 
                 if player.get('has_ball', False):
@@ -296,7 +296,7 @@ class Tracker:
 
             # Draw Referee
             for _, referee in referee_dict.items():
-                frame = self.draw_ellipse(frame, referee["bbox"], (0, 255, 255))  # Draw ellipse around referee
+                frame = self.draw_ellipse(frame, referee["bbox"], (255, 0, 0))  # Draw ellipse around referee
 
             # Draw Ball
             for track_id, ball in ball_dict.items():
