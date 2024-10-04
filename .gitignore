@@ -14,7 +14,7 @@ api_keys.txt
 models/best.pt
 models/last.pt
 output_videos/output_video.avi
-input_videos/video.avi
+inputs_videos/video.mp4
 output_videos/output_video1.avi
 
 
