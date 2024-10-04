@@ -7,7 +7,8 @@ from player_ball_assigner import PlayerBallAssigner
 from camera_movement_estimator import CameraMovementEstimator
 from view_transformer import ViewTransformer
 from speed_and_distance_estimator import SpeedAndDistance_Estimator
-
+from converter import convert_avi_to_mp4
+import os
 
 def main():
     # Read the video frames
@@ -114,6 +115,18 @@ def main():
 
     # Save the annotated video frames as a new video file
     save_video(output_video_frames, "output_videos/output_video1.avi")
+
+################################### video saved as .mp4 ###############################################
+    # Define paths
+    INPUT_FOLDER = "output_videos"
+    OUTPUT_FOLDER = "output_videos"
+    
+    # After running your analysis and saving the .avi file, convert it to .mp4
+    input_video_path = os.path.join(OUTPUT_FOLDER, "output_video1.avi")
+    output_video_path = os.path.join(OUTPUT_FOLDER, "output_video2.mp4")
+
+    # Convert the .avi file to .mp4
+    convert_avi_to_mp4(input_video_path, output_video_path)
 
 if __name__ == "__main__":
     main()

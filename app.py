@@ -41,8 +41,20 @@ if st.button("Analyze"):
 # Show the 'Show Analysis Video' button only if analysis is complete
 if st.session_state.analysis_complete:
     if st.button("Show Analysis Video"):
-        output_video_path = os.path.join(OUTPUT_FOLDER, "output_video1.avi")
+        output_video_path = os.path.join(OUTPUT_FOLDER, "output_video2.mp4")
         if os.path.exists(output_video_path):
+            # Display the MP4 video in Streamlit
             st.video(output_video_path)
+
+            # Provide a download button
+            with open(output_video_path, "rb") as video_file:
+                video_bytes = video_file.read()
+
+            st.download_button(
+                label="Download Analysis Video",
+                data=video_bytes,
+                file_name="output_video2.mp4",
+                mime="video/mp4"
+            )
         else:
             st.warning("Output video not found!")
