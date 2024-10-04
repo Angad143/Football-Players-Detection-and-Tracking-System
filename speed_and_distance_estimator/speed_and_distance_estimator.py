@@ -90,11 +90,17 @@ class SpeedAndDistance_Estimator():
                         position[1] += 40  # Adjust the vertical position to draw text below the bounding box
 
                         position = tuple(map(int, position))  # Convert position back to a tuple of integers
-                        # Draw the speed information on the frame at the calculated position
-                        cv2.putText(frame, f"{speed:.2f} km/h", position, cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
-                        # Draw the distance information below the speed
-                        cv2.putText(frame, f"{distance:.2f} m", (position[0], position[1] + 20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2)
 
+                        # Draw the speed information on the frame at the calculated position
+                        cv2.putText(frame, f"{speed:.2f} km/h", position, 
+                                           cv2.FONT_HERSHEY_SIMPLEX, 0.5, 
+                                          (74, 7, 20), 2)  # Grey color for speed
+
+                        # Draw the distance information below the speed
+                        cv2.putText(frame, f"{distance:.2f} m", (position[0], position[1] + 20), 
+                                          cv2.FONT_HERSHEY_SIMPLEX, 0.5, 
+                                          (74, 7, 20), 2)  # Grey color for distance
+                       
             output_frames.append(frame)  # Add the annotated frame to the output list
 
         return output_frames  # Return the list of frames with drawn speed and distance information
