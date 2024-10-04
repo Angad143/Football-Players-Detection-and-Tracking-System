@@ -113,7 +113,7 @@ def main():
     speed_and_distance_estimator.draw_speed_and_distance(output_video_frames, tracks)
 
     # Save the annotated video frames as a new video file
-    save_video(output_video_frames, "output_videos/output_video.avi")
+    save_video(output_video_frames, "output_videos/output_video1.avi")
 
 if __name__ == "__main__":
     main()
