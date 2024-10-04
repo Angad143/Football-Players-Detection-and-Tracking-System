@@ -96,25 +96,32 @@ class CameraMovementEstimator():
         return camera_movement
 
     def draw_camera_movement(self, frames, camera_movement_per_frame):
-        # Overlay camera movement annotations on each frame
-        output_frames = []
+          # Overlay camera movement annotations on each frame
+          output_frames = []
 
-        for frame_num, frame in enumerate(frames):
-            frame = frame.copy()  # Make a copy of the current frame
+          for frame_num, frame in enumerate(frames):
+              frame = frame.copy()  # Make a copy of the current frame
 
-            # Create an overlay rectangle for the text
-            overlay = frame.copy()
-            cv2.rectangle(overlay, (0, 0), (500, 100), (255, 255, 255), -1)
-            alpha = 0.6  # Transparency for the overlay
-            cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)  # Apply the overlay
+              # Create an overlay rectangle for the text
+              overlay = frame.copy()
+              cv2.rectangle(overlay, (0, 0), (500, 100), (255, 255, 255), -1)  # White background for text
+              alpha = 0.6  # Transparency for the overlay
+              cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)  # Apply the overlay
 
-            # Get the camera movement for the current frame
-            x_movement, y_movement = camera_movement_per_frame[frame_num]
-            # Annotate the X movement
-            frame = cv2.putText(frame, f"Camera Movement X: {x_movement:.2f}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
-            # Annotate the Y movement
-            frame = cv2.putText(frame, f"Camera Movement Y: {y_movement:.2f}", (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 0), 3)
+              # Get the camera movement for the current frame
+              x_movement, y_movement = camera_movement_per_frame[frame_num]
 
-            output_frames.append(frame)  # Add the annotated frame to the output list
+              # Annotate the X movement in red (RGB: (255, 0, 0) => BGR: (0, 0, 255))
+              frame = cv2.putText(frame, f"Camera Movement X: {x_movement:.2f}", 
+                            (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, 
+                            (0, 0, 255), 3)  # Red text for X movement
 
-        return output_frames  # Return the list of annotated frames
+              # Annotate the Y movement in green (RGB: (0, 255, 0) => BGR: (0, 255, 0))
+              frame = cv2.putText(frame, f"Camera Movement Y: {y_movement:.2f}", 
+                            (10, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, 
+                            (255, 0, 0), 3)  # Blue text for Y movement
+
+              output_frames.append(frame)  # Add the annotated frame to the output list
+
+          return output_frames  # Return the list of annotated frames
+
