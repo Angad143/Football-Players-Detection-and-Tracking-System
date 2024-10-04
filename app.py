@@ -16,7 +16,7 @@ if 'analysis_complete' not in st.session_state:
     st.session_state.analysis_complete = False
 
 # Upload video file
-uploaded_file = st.file_uploader("Upload a football video (Max size 10 MB)", type=["mp4"], accept_multiple_files=False)
+uploaded_file = st.file_uploader("Please upload a football video (Max size 200 MB)", type=["mp4"], accept_multiple_files=False)
 
 if uploaded_file:
     # Save the uploaded video to the Input folder

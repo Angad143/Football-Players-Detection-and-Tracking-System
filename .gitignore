@@ -16,6 +16,8 @@ models/last.pt
 output_videos/output_video.avi
 inputs_videos/video.mp4
 output_videos/output_video1.avi
+output_videos/output_video2.mp4
+
 
 
 ##################################################
