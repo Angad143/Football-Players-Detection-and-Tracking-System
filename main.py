@@ -12,7 +12,9 @@ import os
 
 def main():
     # Read the video frames
-    video_frames = read_video("inputs_videos/football_video_01.mp4")
+    # video_frames = read_video("inputs_videos/football_video_01.mp4")
+    video_frames = read_video("inputs_videos/video.mp4")
+
 
     # Initialize the Tracker with the path to the YOLO model
     tracker = Tracker('models/best.pt')
@@ -122,8 +124,8 @@ def main():
     # OUTPUT_FOLDER = "output_videos"
     
     # # After running your analysis and saving the .avi file, convert it to .mp4
-    # input_video_path = os.path.join(OUTPUT_FOLDER, "output_video1.avi")
-    # output_video_path = os.path.join(OUTPUT_FOLDER, "output_video2.mp4")
+    # input_video_path = os.path.join(OUTPUT_FOLDER, "output_video.avi")
+    # output_video_path = os.path.join(OUTPUT_FOLDER, "output_video.mp4")
 
     # # Convert the .avi file to .mp4
     # convert_avi_to_mp4(input_video_path, output_video_path)
