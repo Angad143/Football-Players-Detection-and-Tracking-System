@@ -24,7 +24,7 @@ This project detects and tracks football players, referees, and the ball from vi
 <img src="output_videos/tracked_players.png" alt="tracked_players" width="1200" height="400">
 
 ## Features
-- **Player and Referee Detection**: Uses [YOLOv8](https://github.com/ultralytics/yolov8) to detect players, referees, and footballs in video footage.
+- **Player and Referee Detection**: Uses [YOLOv5](https://github.com/ultralytics/yolov5) to detect players, referees, and footballs in video footage.
 - **Team Classification**: Automatically assigns players to teams based on their jersey color using Kmeans clustering.
 - **Ball Possession Analysis**: Calculates which team has control of the ball and their percentage of possession.
 - **Player Tracking**: Tracks player movements in real-time, measuring distance covered in meters using perspective transformation.
