@@ -12,6 +12,7 @@ def read_video(video_path):
         frames.append(frame)  # Append each captured frame to the frames list
     return frames  # Return the list of frames
 
+# XVID is a codec. A codec is a piece of software or hardware that compresses and decompresses digital video.
 def save_video(output_video_frames, output_video_path):
     # Define the codec and create a VideoWriter object to save the video
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
