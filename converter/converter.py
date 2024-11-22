@@ -9,3 +9,8 @@ def convert_avi_to_mp4(input_path, output_path):
         print(f"Converted {input_path} to {output_path}")
     except Exception as e:
         print(f"Error during conversion: {e}")
+
+
+
+# libx264 is an open-source software library for encoding video into the H.264 format, 
+# providing high-quality video with efficient compression.
