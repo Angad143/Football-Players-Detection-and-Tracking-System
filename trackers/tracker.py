@@ -242,11 +242,15 @@ class Tracker:
         Returns:
         - frame (ndarray): The annotated frame.
         """
-        # Draw a semi-transparent rectangle for displaying statistics
+        # Create an overlay rectangle for the text with deeper white background
         overlay = frame.copy()
-        cv2.rectangle(overlay, (1350, 850), (1900, 970), (255, 255, 255), -1)
-        alpha = 0.4
-        cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
+
+        # Define the rectangle's position and size (top area of the frame)
+        cv2.rectangle(overlay, (1050, 0), (1600, 100), (255, 255, 255), -1)  # Rectangle just above the text
+
+        # Adjust the alpha value for deeper opacity
+        alpha = 0.9  # Higher alpha for a more opaque white background
+        cv2.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)  # Blend the overlay with the original frame
 
         # Slice control data up to current frame
         team_ball_control_till_frame = team_ball_control[:frame_num + 1]  
@@ -258,13 +262,14 @@ class Tracker:
         team_2 = team_2_num_frames / (team_1_num_frames + team_2_num_frames)
 
         # Display the ball control percentages on the frame
-        # Using red color for Team 1 Ball Control
-        cv2.putText(frame, f"Team 1 Ball Control: {team_1 * 100:.2f}%", (1400, 900), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
+        # Using red color for Team 1 Ball Control within the white transparent rectangle
+        cv2.putText(frame, f"Team A Ball Control: {team_1 * 100:.2f}%", (1100, 40), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 3)
 
-        # Using green color for Team 2 Ball Control
-        cv2.putText(frame, f"Team 2 Ball Control: {team_2 * 100:.2f}%", (1400, 950), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
+        # Using blue color for Team 2 Ball Control within the white transparent rectangle
+        cv2.putText(frame, f"Team B Ball Control: {team_2 * 100:.2f}%", (1100, 80), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 0, 0), 3)
 
         return frame
+
     
     
     def draw_annotations(self, video_frames, tracks, team_ball_control):
