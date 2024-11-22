@@ -41,7 +41,7 @@ This project detects and tracks football players, referees, and the ball from vi
 - **Video Clips**: [Input Videos](https://github.com/Angad143/Football-Analysis-Projects/tree/main/Inputs_Videos)
 
 ## Technologies Used
-- **YOLOv8**: Detects players, referees, and footballs in the video. ([Ultralytics YOLOv5](https://github.com/ultralytics/yolov5))
+- **YOLOv5**: Detects players, referees, and footballs in the video. ([Ultralytics YOLOv5](https://github.com/ultralytics/yolov5))
 - **Kmeans Clustering**: Classifies players based on their team colors.
 - **Optical Flow**: Tracks camera movement to ensure accurate player tracking.
 - **Perspective Transformation**: Converts pixel measurements into real-world meters.
